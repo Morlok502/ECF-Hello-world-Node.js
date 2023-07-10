@@ -17,7 +17,7 @@ Il faut commencer par mettre à jour l'index du dépot, puis installer le paquet
   ``` 
   node -v
   ```  
-  ![](img\image.png)  
+  ![](img/image.png)  
 - Installer le gestionnaire de paquets de nodejs : npm
   ```
   sudo apt install npm
@@ -32,19 +32,19 @@ Il faut commencer par mettre à jour l'index du dépot, puis installer le paquet
   ```
   nest new project-name
   ```
-  ![](img\image1.png)
+  ![](img/image1.png)
 - Une fois le projet initialisé, on peut lancer l'application  
   ```
   npm run start
   ```
-  ![](img\image2.png)
+  ![](img/image2.png)
 
 ### 1.3 Test de l'application
 
 Le port d'écoute par défaut est le port 3000 (information visible dans **dist/main.js** : ` await app.listen(3000)`)
 
 On ouvre un navigateur sur l'adresse `localhost:3000` et on constate que l'application fonctionne :  
-![](img\image3.png)  
+![](img/image3.png)  
 
 ## 2. Dockerizez votre application Nodejs (2 points).
 
