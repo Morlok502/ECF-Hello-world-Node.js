@@ -6,8 +6,8 @@ Choix du Framework : NestJS
 
 ### 1.1 Installation de nodeJS, npm et nestJS 
 
-- On peut installer nodeJS en utilisant apt.  
-Il faut commencer par mettre à jour l'index du dépot, puis installer le packet nodejs
+- On peut installer nodeJS en utilisant le gestionnaire de paquets apt.  
+Il faut commencer par mettre à jour l'index du dépot, puis installer le paquet nodejs
   ``` 
   sudo apt update
   sudo apt install nodejs
@@ -17,7 +17,7 @@ Il faut commencer par mettre à jour l'index du dépot, puis installer le packet
   ``` 
   node -v
   ```  
-  ![](image.png)  
+  ![](img\image.png)  
 - Installer le gestionnaire de paquets de nodejs : npm
   ```
   sudo apt install npm
@@ -32,9 +32,19 @@ Il faut commencer par mettre à jour l'index du dépot, puis installer le packet
   ```
   nest new project-name
   ```
-  ![](image-1.png)
-- Une fois le projet initialisé, on peut le lancer
+  ![](img\image1.png)
+- Une fois le projet initialisé, on peut lancer l'application  
+  ```
+  npm run start
+  ```
+  ![](img\image2.png)
+
+### 1.3 Test de l'application
+
+Le port d'écoute par défaut est le port 3000 (information visible dans **dist/main.js** : ` await app.listen(3000)`)
+
+On ouvre un navigateur sur l'adresse `localhost:3000` et on constate que l'application fonctionne :  
+![](img\image3.png)  
 
 ## 2. Dockerizez votre application Nodejs (2 points).
-
 
