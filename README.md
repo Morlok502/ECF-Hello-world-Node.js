@@ -96,7 +96,7 @@ Remarque : on expose le port 3000
 - On ouvre un navigateur sur l'adresse `localhost:3001` et on constate que l'application fonctionne :  
   ![](img/image7.png)
 
-#### 3. Écrivez le script qui build/test et le nodejs et déployez le sur le kube créé
+### 3. Écrivez le script qui build/test et le nodejs et déployez le sur le kube créé
 
 ### Sources utilisées  
 
