@@ -14,7 +14,7 @@ ___
       - [2.2 Build de l'image](#22-build-de-limage)
       - [2.3 Lancement du container](#23-lancement-du-container)
       - [2.4 Test de l'application dockerisée](#24-test-de-lapplication-dockerisée)
-      - [3. Écrivez le script qui build/test et le nodejs et déployez le sur le kube créé](#3-écrivez-le-script-qui-buildtest-et-le-nodejs-et-déployez-le-sur-le-kube-créé)
+    - [3. Écrivez le script qui build/test et le nodejs et déployez le sur le kube créé](#3-écrivez-le-script-qui-buildtest-et-le-nodejs-et-déployez-le-sur-le-kube-créé)
     - [Sources utilisées](#sources-utilisées)
  
 ## Activité Type 2 : Déploiement d’une application en continu
