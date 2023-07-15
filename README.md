@@ -105,10 +105,13 @@ Remarque : on expose le port 3000
 #### 3.2 Utilisation de AWS CodeBuild
 
 - Création du fichier [buildspec.yml](buildspec.yml) à la racine du dépot.  
-- affectation de la policiy *`AmazonEC2ContainerRegistryReadOnly`* au rôle IAM utilisé pour le projet build, afin qu'il puisse se connecter à AWS ECR (source [stackoverflow](https://stackoverflow.com/questions/43033559/aws-codebuild-getauthorizationtoken-failed))
+- affectation de la policiy *`AmazonEC2ContainerRegistryReadOnly`* au rôle IAM utilisé pour le projet build, afin qu'il puisse se connecter à AWS ECR (source [stackoverflow](https://stackoverflow.com/questions/43033559/aws-codebuild-getauthorizationtoken-failed))  
+- Pour le projet code Build, il faut sélectionner l'option `Privileged` dans `CodeBuild > Build projects > ECF-Hello-world-nestJS > Edit Environment > Override image`, sinon on obtient une erreur du type `Cannot connect to the Docker daemon` au moment d'exécuter la commande `docker build` (source [github.com/aws/aws-codebuild-docker-images](https://github.com/aws/aws-codebuild-docker-images/issues/164))
 
 ### Sources utilisées  
 
 [Doc NestJS](https://docs.nestjs.com/first-steps#running-the-application)  
 [tomray.dev - How to write a NestJS Dockerfile optimized for production](https://www.tomray.dev/nestjs-docker-production)  
+[AWS CodeBuild - Guide de l'utilisateur](https://docs.aws.amazon.com/fr_fr/codebuild/latest/userguide/welcome.html)  
 [AWS - Exemple Amazon ECR pour CodeBuild](https://docs.aws.amazon.com/fr_fr/codebuild/latest/userguide/sample-ecr.html)  
+[moduscreate - Deploy a NestJS Application to Amazon ECS Using CodePipeline](https://moduscreate.com/blog/deploy-a-nestjs-application-to-amazon-ecs-using-codepipeline/)
