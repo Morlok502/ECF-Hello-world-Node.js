@@ -2,34 +2,22 @@
 phases:
   install:
     runtime-versions:
-      nodejs: latest
-    commands:
-      - echo -e "----- $APP_NAME -----\n"
-      - echo -e "----- Install nodejs, npm & nest.js -----\n"
-      - npm install && npm install -g @nestjs/cli
+      docker: latest
   pre_build:
     commands:
-      - echo -e "\nInstallation des dependances"
-      - npm install
       - echo -e "\nConnexion a AWS ECR"
-      - echo -e "\n --DEBUG-- AWS_ACCOUNT_ID - $AWS_ACCOUNT_ID"
-      - echo -e "\n --DEBUG-- AWS_DEFAULT_REGION - $AWS_DEFAULT_REGION"
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - echo -e "\n --DEBUG-- REPOSITORY_URI - $REPOSITORY_URI"
-      - echo -e "\n --DEBUG-- CODEBUILD_RESOLVED_SOURCE_VERSION - $CODEBUILD_RESOLVED_SOURCE_VERSION"
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - echo -e "\n --DEBUG-- COMMIT_HASH - $COMMIT_HASH"
       - IMAGE_TAG=${COMMIT_HASH:=latest}
-      - echo -e "\n --DEBUG-- IMAGE_TAG - $IMAGE_TAG"
   build:
     commands:
-      - echo -e "Build $APP_NAME started on `date`\n"
-      - npm run build
+      - echo -e "Build docker image $REPOSITORY_URI:$IMAGE_TAG\n"
+      - docker build -t $REPOSITORY_URI:latest -f Dockerfile .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - printf '[{"name":"nestjs-graphql","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
-  files:
-    - '**/*'
-  name: $APP_NAME
-  exclude-paths: 
-  - ./img
-  - ./.gitingore
-  - ./README.md
+  files: imagedefinitions.json
