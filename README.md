@@ -15,6 +15,8 @@ ___
       - [2.3 Lancement du container](#23-lancement-du-container)
       - [2.4 Test de l'application dockerisée](#24-test-de-lapplication-dockerisée)
     - [3. Écrivez le script qui build/test et le nodejs et déployez le sur le kube créé](#3-écrivez-le-script-qui-buildtest-et-le-nodejs-et-déployez-le-sur-le-kube-créé)
+      - [3.1 Utilisation de AWS Codepipeline](#31-utilisation-de-aws-codepipeline)
+      - [3.2 Utilisation de AWS CodeBuild](#32-utilisation-de-aws-codebuild)
     - [Sources utilisées](#sources-utilisées)
  
 ## Activité Type 2 : Déploiement d’une application en continu
@@ -98,7 +100,15 @@ Remarque : on expose le port 3000
 
 ### 3. Écrivez le script qui build/test et le nodejs et déployez le sur le kube créé
 
+#### 3.1 Utilisation de AWS Codepipeline
+
+#### 3.2 Utilisation de AWS CodeBuild
+
+- Création du fichier [buildspec.yml](buildspec.yml) à la racine du dépot.  
+- affectation de la policiy *`AmazonEC2ContainerRegistryReadOnly`* au rôle IAM utilisé pour le projet build, afin qu'il puisse se connecter à AWS ECR (source [stackoverflow](https://stackoverflow.com/questions/43033559/aws-codebuild-getauthorizationtoken-failed))
+
 ### Sources utilisées  
 
 [Doc NestJS](https://docs.nestjs.com/first-steps#running-the-application)  
-[www.tomray.dev](https://www.tomray.dev/nestjs-docker-production)  
+[tomray.dev - How to write a NestJS Dockerfile optimized for production](https://www.tomray.dev/nestjs-docker-production)  
+[AWS - Exemple Amazon ECR pour CodeBuild](https://docs.aws.amazon.com/fr_fr/codebuild/latest/userguide/sample-ecr.html)  
