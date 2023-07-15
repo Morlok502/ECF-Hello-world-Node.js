@@ -1,10 +1,10 @@
 ﻿version: 0.2
   variables:
     APP_NAME: "Hello World NestJS"
-    AWS_DEFAULT_REGION: "eu-west-3"
-    AWS_ACCOUNT_ID: ${aws sts get-caller-identity --query "Account" --output text}
-    IMAGE_REPO_NAME: "ecf-hello-world-nestjs"
-    IMAGE_TAG: "latest"
+    # AWS_DEFAULT_REGION: "eu-west-3"
+    # AWS_ACCOUNT_ID: $(aws sts get-caller-identity --query "Account" --output text)
+    # IMAGE_REPO_NAME: "ecf-hello-world-nestjs"
+    #IMAGE_TAG: "latest"
 phases:
   install:
     runtime-versions:
