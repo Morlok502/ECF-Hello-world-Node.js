@@ -1,22 +1,30 @@
 ﻿version: 0.2
-
-
+  variables:
+    APP_NAME: "Hello World NestJS"
+    AWS_DEFAULT_REGION: "eu-west-3"
+    AWS_ACCOUNT_ID: ${aws sts get-caller-identity --query "Account" --output text}
+    IMAGE_REPO_NAME: "ecf-hello-world-nestjs"
+    IMAGE_TAG: "latest"
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: latest
+    commands:
+      - echo -e "----- $APP_NAME -----\n"
+      - echo -e "----- Install nodejs, npm & nest.js -----\n"
+      - npm install && npm install -g @nestjs/cli
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
+      - echo -e "Logging in to Amazon ECR...\n"
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
+      - echo -e "Build started on `date`\n"
+      - echo -e "Building the Docker image...\n"        
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
+      - echo -e "Build completed on `date`\n"
+      - echo -e "Pushing the Docker image...\n"
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
