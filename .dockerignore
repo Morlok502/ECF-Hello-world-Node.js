@@ -1,6 +1,8 @@
 Dockerfile
 .dockerignore
+.gitignore
 node_modules
 npm-debug.log
 dist
-buildspec_release.yml
+buildspec*.yml
+img
