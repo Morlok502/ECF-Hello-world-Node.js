@@ -1,5 +1,5 @@
 ﻿version: 0.2
-  variables:
+  # variables:
     # APP_NAME: "Hello World NestJS"
     # AWS_DEFAULT_REGION: "eu-west-3"
     # AWS_ACCOUNT_ID: $(aws sts get-caller-identity --query "Account" --output text)
