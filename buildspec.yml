@@ -9,7 +9,7 @@ phases:
       - echo -e "----- Install nodejs, npm & nest.js -----\n"
       - npm install && npm install -g @nestjs/cli
       - echo -e "\nTest e2e"
-      - npm run npm i --save-dev @nestjs/testing
+      - npm i --save-dev @nestjs/testing
       - npm run test:e2e
       - echo -e "\nConnexion a AWS ECR"
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
