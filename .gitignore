@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+# Volume du container postgres
+/pgdata
+
 # Logs
 logs
 *.log
