@@ -7,7 +7,9 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY --chown=node:node package*.json ./
 
-# Install app dependencies
+# Install app dependencies listed in package.json
+# "ci" stands for "clean install" and is similar to npm install, except it removes the node_modules directory and then reinstalls the dependencies. 
+# This ensures that the node_modules directory is as optimized as possible
 RUN npm ci
 
 # Bundle app source
