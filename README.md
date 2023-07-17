@@ -114,10 +114,16 @@ Remarque : on expose le port 3000
 - affectation de la policiy *`AmazonEC2ContainerRegistryReadOnly`* au rôle IAM utilisé pour le projet build, afin qu'il puisse se connecter à AWS ECR (source [stackoverflow](https://stackoverflow.com/questions/43033559/aws-codebuild-getauthorizationtoken-failed))  
 - pour le projet code Build, il faut sélectionner l'option `Privileged` dans `CodeBuild > Build projects > ECF-Hello-world-nestJS > Edit Environment > Override image`, sinon on obtient une erreur du type `Cannot connect to the Docker daemon` au moment d'exécuter la commande `docker build` (source [github.com/aws/aws-codebuild-docker-images](https://github.com/aws/aws-codebuild-docker-images/issues/164))
 
+#### 3.3 déploiement de l'application nestjs dans le Kube (AWS EKS)
+
+Le déploiement de l'application "dockerisée" est détaillée dans le repository [ECF-deploiement-nestJS-Kube](https://github.com/Morlok502/ECF-deploiement-nestJS-Kube).  
+Voir le fichier [READMEmd](https://github.com/Morlok502/ECF-deploiement-nestJS-Kube#activit%C3%A9-type-2--d%C3%A9ploiement-dune-application-en-continu) pour la suite de la procédure.  
+
 ### Sources utilisées  
 
 [Doc NestJS](https://docs.nestjs.com/first-steps#running-the-application)  
 [tomray.dev - How to write a NestJS Dockerfile optimized for production](https://www.tomray.dev/nestjs-docker-production)  
 [AWS CodeBuild - Guide de l'utilisateur](https://docs.aws.amazon.com/fr_fr/codebuild/latest/userguide/welcome.html)  
 [AWS - Exemple Amazon ECR pour CodeBuild](https://docs.aws.amazon.com/fr_fr/codebuild/latest/userguide/sample-ecr.html)  
-[modus create - Deploy a NestJS Application to Amazon ECS Using CodePipeline](https://moduscreate.com/blog/deploy-a-nestjs-application-to-amazon-ecs-using-codepipeline/)
+[modus create - Deploy a NestJS Application to Amazon ECS Using CodePipeline](https://moduscreate.com/blog/deploy-a-nestjs-application-to-amazon-ecs-using-codepipeline/)  
+[Step-by-Step Guide: Setting Up a NestJS Application with Docker and PostgreSQL](https://dev.to/chukwutosin_/step-by-step-guide-setting-up-a-nestjs-application-with-docker-and-postgresql-5hei)  
