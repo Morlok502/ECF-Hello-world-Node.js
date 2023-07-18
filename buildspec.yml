@@ -1,4 +1,4 @@
-﻿version: 0.2
+version: 0.2
 phases:
   install:
     runtime-versions:
@@ -6,23 +6,23 @@ phases:
   pre_build:
     on-failure: ABORT
     commands:
-      - echo -e "----- Install nodejs, npm & nest.js -----\n"
+      - echo "----- Install nodejs, npm & nest.js -----"
       - npm install && npm install -g @nestjs/cli
-      - echo -e "\nTest e2e"
+      - echo "Test e2e"
       - npm i --save-dev @nestjs/testing
       - npm run test:e2e
-      - echo -e "\nConnexion a AWS ECR"
+      - echo "Connexion a AWS ECR"
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
-      - echo -e "Build docker image $REPOSITORY_URI:$IMAGE_TAG\n"
+      - echo "Build docker image $REPOSITORY_URI:$IMAGE_TAG"
       - docker build -t $REPOSITORY_URI:latest -f Dockerfile .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
-      - echo -e "Push docker image $REPOSITORY_URI:$IMAGE_TAG\n"
+      - echo "Push docker image $REPOSITORY_URI:$IMAGE_TAG"
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - printf '[{"name":"nestjs-graphql","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
