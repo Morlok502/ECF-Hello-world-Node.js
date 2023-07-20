@@ -17,7 +17,8 @@ ___
     - [3. Écrivez le script qui build/test et le nodejs et déployez le sur le kube créé](#3-écrivez-le-script-qui-buildtest-et-le-nodejs-et-déployez-le-sur-le-kube-créé)
       - [3.1 Utilisation de AWS Codepipeline](#31-utilisation-de-aws-codepipeline)
       - [3.2 Utilisation de AWS CodeBuild](#32-utilisation-de-aws-codebuild)
-    - [Sources utilisées](#sources-utilisées)
+      - [3.3 déploiement de l'application nestjs dans le Kube (AWS EKS)](#33-déploiement-de-lapplication-nestjs-dans-le-kube-aws-eks)
+  - [Sources utilisées](#sources-utilisées)
  
 ## Activité Type 2 : Déploiement d’une application en continu
 
@@ -119,7 +120,7 @@ Remarque : on expose le port 3000
 Le déploiement de l'application "dockerisée" est détaillée dans le repository [ECF-deploiement-nestJS-Kube](https://github.com/Morlok502/ECF-deploiement-nestJS-Kube).  
 Voir le fichier [READMEmd](https://github.com/Morlok502/ECF-deploiement-nestJS-Kube#activit%C3%A9-type-2--d%C3%A9ploiement-dune-application-en-continu) pour la suite de la procédure.  
 
-### Sources utilisées  
+## Sources utilisées  
 
 [Doc NestJS](https://docs.nestjs.com/first-steps#running-the-application)  
 [tomray.dev - How to write a NestJS Dockerfile optimized for production](https://www.tomray.dev/nestjs-docker-production)  
