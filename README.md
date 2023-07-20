@@ -103,6 +103,12 @@ Remarque : on expose le port 3000
 
 #### 3.1 Utilisation de AWS Codepipeline
 
+On construit un pipeline avec les caractéristiques suivantes :  
+- on créé une connexion avec notre repository github  
+- on créé un projet Build (CodeBuild)  
+- on indique pour le déploiement, de générer une image dans ECR (Elastic Container Registry)  
+![  ](img/image-10.png)  
+
 #### 3.2 Utilisation de AWS CodeBuild
 
 - Création du fichier [buildspec.yml](buildspec.yml) à la racine du dépôt.  
