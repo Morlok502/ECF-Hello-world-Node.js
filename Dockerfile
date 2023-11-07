@@ -1,31 +1,30 @@
-# Base image
+# L'image node:18-alpine est une image légère de Node.js basée sur Alpine Linux
 FROM node:18-alpine
 
-# Create app directory
+# Creation du dossier de app
 WORKDIR /usr/src/app
 
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# On utilise --chown=node:node pour s'assurer que les fichiers appartiennent à l'utilisateur node
 COPY --chown=node:node package*.json ./
 
-# Install app dependencies listed in package.json
-# "ci" stands for "clean install" and is similar to npm install, except it removes the node_modules directory and then reinstalls the dependencies. 
-# This ensures that the node_modules directory is as optimized as possible
+# Installation des dépendances listées dans package.json
+# "ci" veut dire "clean install" et est similaire à npm install, sauf qu'il supprime le répertoire node_modules, puis réinstalle les dépendances. Cela garantit que le répertoire node_modules soit le plus optimisé
 RUN npm ci
 
-# Bundle app source
+# Copie de tous les fichiers du répertoire actuel vers le répertoire de travail (/usr/src/app) dans l'image
 COPY --chown=node:node . .
 
-# Run the build command which creates the production bundle
+# Lance la commande de build qui crée le bundle de production
 RUN npm run build
 
-# Set NODE_ENV environment variable
+# L'environnement de production est utilisé pour exécuter l'application en production
 ENV NODE_ENV production
 
-# Running `npm ci` removes the existing node_modules directory and passing in --only=production ensures that only the production dependencies are installed. This ensures that the node_modules directory is as optimized as possible
+# `npm ci` supprime le répertoire node_modules existant et l paramètre --only=production garantit que seules les dépendances de production sont installées. Cela garantit que le répertoire node_modules soit le plus optimisé
 RUN npm ci --only=production && npm cache clean --force
 
-# Use the node user from the image (instead of the root user)
+# Utilise l'utilisateur "node" de l'image (au lieu de l'utilisateur root)
 USER node
 
-# Start the server using the production build
+# Lance le serveur en utilisant le build de production
 CMD [ "node", "dist/main.js" ]
